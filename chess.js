@@ -1,21 +1,26 @@
-var board,
-  game = new Chess();
+let board
+const game = new Chess()
 
-var makeRandomMove = function() {
-  var possibleMoves = game.moves();
-
-  // exit if the game is over
-  if (game.game_over() === true ||
+function gameOver(game, possibleMoves) {
+  return (
+    game.game_over() === true ||
     game.in_draw() === true ||
-    possibleMoves.length === 0) return;
+    possibleMoves.length === 0
+  )
+}
 
-  var randomIndex = Math.floor(Math.random() * possibleMoves.length);
-  game.move(possibleMoves[randomIndex]);
-  board.position(game.fen());
+function makeRandomMove() {
+  const possibleMoves = game.moves()
 
-  window.setTimeout(makeRandomMove, 500);
-};
+  if (gameOver(game, possibleMoves)) return;
 
-board = ChessBoard('board', 'start');
+  const randomIndex = Math.floor(Math.random() * possibleMoves.length)
+  game.move(possibleMoves[randomIndex])
+  board.position(game.fen())
 
-window.setTimeout(makeRandomMove, 500);
+  window.setTimeout(makeRandomMove, 500)
+}
+
+board = ChessBoard('board', 'start')
+
+window.setTimeout(makeRandomMove, 500)
