@@ -1,3 +1,11 @@
+import $ from 'jquery'
+import Chess from 'chess.js'
+import ChessBoard from 'chessboardjs'
+import './style.css'
+
+window.jQuery = $
+window.$ = $
+
 let board
 const game = new Chess()
 
